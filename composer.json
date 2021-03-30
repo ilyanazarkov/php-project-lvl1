@@ -11,5 +11,15 @@
             "email": "ilyanazarkov@ilyanazarkov.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "Brain\\Games\\": "src/"
+        },
+        "files": [
+            "src/Cli.php"
+        ]
+    },
+    "require": {
+        "wp-cli/php-cli-tools": "^0.11.12"
+    }
 }
