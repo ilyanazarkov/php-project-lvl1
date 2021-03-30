@@ -1,6 +1,10 @@
 {
     "name": "hexlet/code",
+    "bin": [
+        "bin/brain-games"
+    ],
     "description": "Php project lvl 1",
+    "license": "MIT",
     "authors": [
         {
             "name": "Ilya",
