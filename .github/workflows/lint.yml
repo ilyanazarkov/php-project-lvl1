@@ -8,17 +8,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up PHP
+        # Check-out repository under GitHub workspace
+        # https://github.com/actions/checkout
+      - uses: actions/checkout@v2
+        # Step's name
+      - name: Setup PHP
+        # Action gives to setup the PHP environment to test application
+        # https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
-          coverage: none
-          tools: composer
-
-      - name: Install PHP dependencies
-        run: |
-          composer install --prefer-dist --no-progress --no-ansi --no-interaction
-          echo "${PWD}/vendor/bin" >> $GITHUB_PATH
-
+          # Specify the PHP version
+          php-version: '7.4'
+      - name: Install
+        # Install project
+        run: make install
       - name: Run linter
+        # Run Linter
         run: make lint
