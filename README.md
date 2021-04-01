@@ -12,13 +12,13 @@ Demo brain-even:
 https://asciinema.org/a/puDmmcMJ1fHPSrOdZUUtoCvfk
 
 Demo brain-calc:
-https://asciinema.org/a/PhIAmxTlxLh8qXC2JHj9VSyUv
+https://asciinema.org/a/LYEq3DzjeA9LKEQxwlfYJ3RLT
 
 Demo brain-gcd:
-https://asciinema.org/a/J79wYfKKiA6LmmprmkDwrc4RO
+https://asciinema.org/a/XVlSTXolXONrYQI2PqbPmripr
 
 Demo brain-progression:
-https://asciinema.org/a/HoXALrHDV8R20L3unafUt52hL
+https://asciinema.org/a/JvGi6VpKBfcWvoJX32ugME00q
 
 Demo brain-prime:
-https://asciinema.org/a/hvzgldFPvbrNz7IKH7WNI5lF7
+https://asciinema.org/a/Rcuy2S6W8e3hPtbOeA16LZfmv
