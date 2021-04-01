@@ -4,7 +4,8 @@
         "bin/brain-games",
         "bin/brain-even",
         "bin/brain-calc",
-        "bin/brain-gcd"
+        "bin/brain-gcd",
+        "bin/brain-progression"
     ],
     "description": "Php project lvl 1",
     "license": "MIT",
