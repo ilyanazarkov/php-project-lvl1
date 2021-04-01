@@ -5,7 +5,8 @@
         "bin/brain-even",
         "bin/brain-calc",
         "bin/brain-gcd",
-        "bin/brain-progression"
+        "bin/brain-progression",
+        "brain-prime"
     ],
     "description": "Php project lvl 1",
     "license": "MIT",
