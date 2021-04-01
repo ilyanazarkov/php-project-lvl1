@@ -9,11 +9,6 @@ class Even extends Engine
 {
     public function startGame()
     {
-        //TODO: @author Ilya Nazarkov, comment: delete debug
-        echo "<pre>";
-        print_r(Helper::gcd(100, 48));
-        echo "</pre>";
-
         $this->greetings();
         $this->sayGameRuleset('Answer "yes" if the number is even, otherwise answer "no".');
 

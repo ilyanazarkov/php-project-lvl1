@@ -38,7 +38,7 @@ abstract class Engine
 
     protected function askQuestion($question, $correctAnswer)
     {
-        self::line("Question: $question");
+        self::line($question);
         $answer = self::prompt('Your answer:');
 
         $isAnswerCorrect = $answer === $correctAnswer;
