@@ -28,4 +28,9 @@ class Helper
 
         return $result;
     }
+
+    public static function gcd($a, $b)
+    {
+        return $b ? self::gcd($b, $a % $b) : $a;
+    }
 }
