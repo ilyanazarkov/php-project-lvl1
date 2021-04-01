@@ -8,5 +8,8 @@
 
 ![Lint Status](https://github.com/ilyanazarkov/php-project-lvl1/actions/workflows/lint.yml/badge.svg)
 
-Demo:
+Demo brain-even:
 https://asciinema.org/a/puDmmcMJ1fHPSrOdZUUtoCvfk
+
+Demo brain-calc:
+https://asciinema.org/a/PhIAmxTlxLh8qXC2JHj9VSyUv
