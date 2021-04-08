@@ -7,7 +7,7 @@ function isEven(int $num): bool
     return $num % 2 === 0;
 }
 
-function calc(string $operation, int $num1, int $num2)
+function calc(string $operation, int $num1, int $num2): int
 {
     switch ($operation) {
         case '+':
@@ -20,7 +20,7 @@ function calc(string $operation, int $num1, int $num2)
             $result = $num1 * $num2;
             break;
         default:
-            $result = false;
+            $result = 0;
             break;
     }
 
@@ -29,14 +29,9 @@ function calc(string $operation, int $num1, int $num2)
 
 function gcd(int $a, int $b): int
 {
-    return $b ? gcd($b, $a % $b) : $a;
+    return (bool)$b ? gcd($b, $a % $b) : $a;
 }
 
-/**
- * @param $num
- * @return bool
- * @link https://en.wikipedia.org/wiki/Primality_test
- */
 function isPrime(int $num): bool
 {
     if ($num <= 3) {

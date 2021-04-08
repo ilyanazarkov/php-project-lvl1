@@ -6,7 +6,7 @@ use function cli\line as cline;
 use function cli\prompt as cprompt;
 
 define("CORRECT_ANSWERS_TO_WIN", 3);
-define("PROMPT_DEFAULT_VALUE", false);
+define("PROMPT_DEFAULT_VALUE", "");
 define("PROMPT_MARKER", " ");
 
 function line(string $text): void
@@ -58,7 +58,7 @@ function askQuestion(string $question, string $correctAnswer, int &$correctAnswe
     return true;
 }
 
-function isPlayerWin($correctAnswers)
+function isPlayerWin(int $correctAnswers): bool
 {
     return $correctAnswers === CORRECT_ANSWERS_TO_WIN;
 }

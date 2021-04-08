@@ -24,3 +24,6 @@ validate:
 
 lint:
 	composer run-script phpcs -- --standard=PSR12 src bin
+
+analyse:
+	vendor/bin/phpstan analyse src bin --level max

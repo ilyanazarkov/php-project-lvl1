@@ -27,6 +27,7 @@ function run(): void
     } while ($result);
 }
 
+/** @return array<int> */
 function getProgressionRange(): array
 {
     $numbers = rand(5, 15);
