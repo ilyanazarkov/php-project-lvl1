@@ -1,65 +1,62 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Helper;
 
-class Helper
+function isEven(int $num): bool
 {
-    public static function isEven($num)
-    {
-        return $num % 2 === 0;
+    return $num % 2 === 0;
+}
+
+function calc(string $operation, int $num1, int $num2)
+{
+    switch ($operation) {
+        case '+':
+            $result = $num1 + $num2;
+            break;
+        case '-':
+            $result = $num1 - $num2;
+            break;
+        case '*':
+            $result = $num1 * $num2;
+            break;
+        default:
+            $result = false;
+            break;
     }
 
-    public static function doMath($num1, $num2, $operation)
-    {
-        switch ($operation) {
-            case '+':
-                $result = $num1 + $num2;
-                break;
-            case '-':
-                $result = $num1 - $num2;
-                break;
-            case '*':
-                $result = $num1 * $num2;
-                break;
-            default:
-                $result = false;
-                break;
-        }
+    return $result;
+}
 
-        return $result;
+function gcd(int $a, int $b): int
+{
+    return $b ? gcd($b, $a % $b) : $a;
+}
+
+/**
+ * @param $num
+ * @return bool
+ * @link https://en.wikipedia.org/wiki/Primality_test
+ */
+function isPrime(int $num): bool
+{
+    if ($num <= 3) {
+        return $num > 1;
     }
 
-    public static function gcd($a, $b)
-    {
-        return $b ? self::gcd($b, $a % $b) : $a;
+    if ($num % 2 === 0 || $num % 3 === 0) {
+        return false;
     }
 
-    /**
-     * @param $num
-     * @return bool
-     * @link https://en.wikipedia.org/wiki/Primality_test
-     */
-    public static function isPrime($num)
-    {
-        if ($num <= 3) {
-            return $num > 1;
-        }
+    $count = 5;
 
-        if ($num % 2 === 0 || $num % 3 === 0) {
+
+    while ($count ** 2 <= $num) {
+        if ($num % $count === 0 || $num % ($count + 2) === 0) {
             return false;
         }
 
-        $count = 5;
-
-
-        while ($count ** 2 <= $num) {
-            if ($num % $count === 0 || $num % ($count + 2) === 0) {
-                return false;
-            }
-
-            $count += 6;
-        }
-
-        return true;
+        $count += 6;
     }
+
+    return true;
 }

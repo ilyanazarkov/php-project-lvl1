@@ -1,25 +1,26 @@
 <?php
 
-namespace Brain\Games\Games;
+namespace Brain\Games\Games\Gcd;
 
-use Brain\Games\Engine;
-use Brain\Games\Helper;
+use function Brain\Games\Engine\greetings;
+use function Brain\Games\Engine\sayGameRuleset;
+use function Brain\Games\Engine\askQuestion;
+use function Brain\Games\Helper\gcd;
 
-class Gcd extends Engine
+function run(): void
 {
-    public function startGame()
-    {
-        $this->greetings();
-        $this->sayGameRuleset('Find the greatest common divisor of given numbers.');
+    $name = greetings();
+    sayGameRuleset('Find the greatest common divisor of given numbers.');
 
-        do {
-            $num1 = rand(0, 100);
-            $num2 = rand(0, 100);
+    $correctAnswers = 0;
 
-            $question = "Question: $num1 $num2";
-            $correctAnswer = (string) Helper::gcd($num1, $num2);
+    do {
+        $num1 = rand(0, 100);
+        $num2 = rand(0, 100);
 
-            $result = $this->askQuestion($question, $correctAnswer);
-        } while ($result);
-    }
+        $question = "Question: $num1 $num2";
+        $correctAnswer = (string) gcd($num1, $num2);
+
+        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
+    } while ($result);
 }

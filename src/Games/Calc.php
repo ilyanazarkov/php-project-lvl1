@@ -1,28 +1,29 @@
 <?php
 
-namespace Brain\Games\Games;
+namespace Brain\Games\Games\Calc;
 
-use Brain\Games\Engine;
-use Brain\Games\Helper;
+use function Brain\Games\Engine\greetings;
+use function Brain\Games\Engine\sayGameRuleset;
+use function Brain\Games\Engine\askQuestion;
+use function Brain\Games\Helper\calc;
 
-class Calc extends Engine
+function run(): void
 {
-    public function startGame()
-    {
-        $this->greetings();
-        $this->sayGameRuleset('What is the result of the expression?');
+    $name = greetings();
+    sayGameRuleset('What is the result of the expression?');
 
-        do {
-            $num1 = rand(0, 100);
-            $num2 = rand(0, 100);
-            $operations = ["+", "-", "*"];
+    $correctAnswers = 0;
 
-            $operation = $operations[array_rand($operations)];
+    do {
+        $num1 = rand(0, 100);
+        $num2 = rand(0, 100);
+        $operations = ["+", "-", "*"];
 
-            $question = "Question: $num1 $operation $num2";
-            $correctAnswer = (string) Helper::doMath($num1, $num2, $operation);
+        $operation = $operations[array_rand($operations)];
 
-            $result = $this->askQuestion($question, $correctAnswer);
-        } while ($result);
-    }
+        $question = "Question: $num1 $operation $num2";
+        $correctAnswer = (string) calc($operation, $num1, $num2);
+
+        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
+    } while ($result);
 }

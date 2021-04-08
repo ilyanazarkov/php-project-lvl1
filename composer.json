@@ -21,7 +21,14 @@
             "Brain\\Games\\": "src/"
         },
         "files": [
-            "src/Cli.php"
+            "src/Cli.php",
+            "src/Engine.php",
+            "src/Helper.php",
+            "src/Games/Even.php",
+            "src/Games/Calc.php",
+            "src/Games/Gcd.php",
+            "src/Games/Prime.php",
+            "src/Games/Progression.php"
         ]
     },
     "scripts": {

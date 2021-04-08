@@ -8,7 +8,6 @@ if (file_exists($autoloadPath)) {
     require_once $autoloadPath;
 }
 
-use Brain\Games\Games\Gcd;
+use function Brain\Games\Games\Gcd\run;
 
-$gameEven = new Gcd();
-$gameEven->startGame();
+run();

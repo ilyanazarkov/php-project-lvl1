@@ -1,41 +1,41 @@
 <?php
 
-namespace Brain\Games\Games;
+namespace Brain\Games\Games\Progression;
 
-use Brain\Games\Engine;
+use function Brain\Games\Engine\greetings;
+use function Brain\Games\Engine\sayGameRuleset;
+use function Brain\Games\Engine\askQuestion;
 
-class Progression extends Engine
+function run(): void
 {
-    public function startGame()
-    {
-        $this->greetings();
-        $this->sayGameRuleset('What number is missing in the progression?');
+    $name = greetings();
+    sayGameRuleset('What number is missing in the progression?');
 
-        do {
-            $range = $this->getProgressionRange();
+    $correctAnswers = 0;
 
-            $hideNumKey = array_rand($range);
-            $correctAnswer = (string) $range[$hideNumKey];
-            $range[$hideNumKey] = "..";
+    do {
+        $range = getProgressionRange();
 
-            $progression = implode(" ", $range);
+        $hideNumKey = array_rand($range);
+        $correctAnswer = (string) $range[$hideNumKey];
+        $range[$hideNumKey] = "..";
 
-            $question = "Question: $progression";
+        $progression = implode(" ", $range);
 
-            $result = $this->askQuestion($question, $correctAnswer);
-        } while ($result);
-    }
+        $question = "Question: $progression";
+        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
+    } while ($result);
+}
 
-    private function getProgressionRange()
-    {
-        $numbers = rand(5, 15);
+function getProgressionRange(): array
+{
+    $numbers = rand(5, 15);
 
-        $start = rand(0, 30);
-        $step = rand(1, 10);
-        $end = $start + $step * $numbers;
+    $start = rand(0, 30);
+    $step = rand(1, 10);
+    $end = $start + $step * $numbers;
 
-        $range = range($start, $end, $step);
+    $range = range($start, $end, $step);
 
-        return $range;
-    }
+    return $range;
 }

@@ -8,7 +8,6 @@ if (file_exists($autoloadPath)) {
     require_once $autoloadPath;
 }
 
-use Brain\Games\Games\Progression;
+use function Brain\Games\Games\Progression\run;
 
-$gameEven = new Progression();
-$gameEven->startGame();
+run();

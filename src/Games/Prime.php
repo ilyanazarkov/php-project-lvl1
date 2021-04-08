@@ -1,24 +1,25 @@
 <?php
 
-namespace Brain\Games\Games;
+namespace Brain\Games\Games\Prime;
 
-use Brain\Games\Engine;
-use Brain\Games\Helper;
+use function Brain\Games\Engine\greetings;
+use function Brain\Games\Engine\sayGameRuleset;
+use function Brain\Games\Engine\askQuestion;
+use function Brain\Games\Helper\isPrime;
 
-class Prime extends Engine
+function run(): void
 {
-    public function startGame()
-    {
-        $this->greetings();
-        $this->sayGameRuleset('Answer "yes" if given number is prime. Otherwise answer "no".');
+    $name = greetings();
+    sayGameRuleset('Answer "yes" if given number is prime. Otherwise answer "no".');
 
-        do {
-            $num = rand(0, 1000);
+    $correctAnswers = 0;
 
-            $question = "Question: $num";
-            $correctAnswer = Helper::isPrime($num) ? "yes" : "no";
+    do {
+        $num = rand(0, 1000);
 
-            $result = $this->askQuestion($question, $correctAnswer);
-        } while ($result);
-    }
+        $question = "Question: $num";
+        $correctAnswer = isPrime($num) ? "yes" : "no";
+
+        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
+    } while ($result);
 }

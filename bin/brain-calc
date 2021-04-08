@@ -8,7 +8,6 @@ if (file_exists($autoloadPath)) {
     require_once $autoloadPath;
 }
 
-use Brain\Games\Games\Calc;
+use function Brain\Games\Games\Calc\run;
 
-$gameEven = new Calc();
-$gameEven->startGame();
+run();

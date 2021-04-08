@@ -1,24 +1,25 @@
 <?php
 
-namespace Brain\Games\Games;
+namespace Brain\Games\Games\Even;
 
-use Brain\Games\Engine;
-use Brain\Games\Helper;
+use function Brain\Games\Engine\greetings;
+use function Brain\Games\Engine\sayGameRuleset;
+use function Brain\Games\Engine\askQuestion;
+use function Brain\Games\Helper\isEven;
 
-class Even extends Engine
+function run(): void
 {
-    public function startGame()
-    {
-        $this->greetings();
-        $this->sayGameRuleset('Answer "yes" if the number is even, otherwise answer "no".');
+    $name = greetings();
+    sayGameRuleset('Answer "yes" if the number is even, otherwise answer "no".');
 
-        do {
-            $num = rand(0, 100);
+    $correctAnswers = 0;
 
-            $question = "Question: $num";
-            $correctAnswer = Helper::isEven($num) ? "yes" : "no";
+    do {
+        $num = rand(0, 100);
 
-            $result = $this->askQuestion($question, $correctAnswer);
-        } while ($result);
-    }
+        $question = "Question: $num";
+        $correctAnswer = isEven($num) ? "yes" : "no";
+
+        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
+    } while ($result);
 }

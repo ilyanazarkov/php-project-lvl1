@@ -1,68 +1,64 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Engine;
 
-use function cli\line;
-use function cli\prompt;
+use function cli\line as cline;
+use function cli\prompt as cprompt;
 
-abstract class Engine
+define("CORRECT_ANSWERS_TO_WIN", 3);
+define("PROMPT_DEFAULT_VALUE", false);
+define("PROMPT_MARKER", " ");
+
+function line(string $text): void
 {
-    protected const CORRECT_ANSWERS_TO_WIN = 3;
-    protected const PROMPT_DEFAULT_VALUE = false;
-    protected const PROMPT_MARKER = " ";
+    cline($text);
+}
 
-    protected $name = "";
-    protected $correctAnswers = 0;
+function prompt(string $text): string
+{
+    return cprompt($text, PROMPT_DEFAULT_VALUE, PROMPT_MARKER);
+}
 
-    protected static function line($text)
-    {
-        line($text);
+function greetings(): string
+{
+    line('Welcome to the Brain Games!');
+    $name = prompt('May I have your name?');
+    line("Hello, $name!");
+
+    return $name;
+}
+
+function sayGameRuleset(string $gameRuleset): void
+{
+    line($gameRuleset);
+}
+
+function askQuestion(string $question, string $correctAnswer, int &$correctAnswers, string $name): bool
+{
+    line($question);
+    $answer = prompt('Your answer:');
+
+    $isAnswerCorrect = $answer === $correctAnswer;
+
+    if (!$isAnswerCorrect) {
+        line("'$answer' is wrong answer ;(. Correct answer was '$correctAnswer'.");
+        line("Let's try again, $name!");
+
+        return false;
     }
 
-    protected static function prompt($text)
-    {
-        return prompt($text, self::PROMPT_DEFAULT_VALUE, self::PROMPT_MARKER);
+    line("Correct!");
+    $correctAnswers += 1;
+
+    if (isPlayerWin($correctAnswers)) {
+        line("Congratulations, $name!");
+        return false;
     }
 
-    protected function greetings()
-    {
-        self::line('Welcome to the Brain Games!');
-        $this->name = self::prompt('May I have your name?');
-        self::line("Hello, {$this->name}!");
-    }
+    return true;
+}
 
-    protected function sayGameRuleset($gameRuleset)
-    {
-        line($gameRuleset);
-    }
-
-    protected function askQuestion($question, $correctAnswer)
-    {
-        self::line($question);
-        $answer = self::prompt('Your answer:');
-
-        $isAnswerCorrect = $answer === $correctAnswer;
-
-        if (!$isAnswerCorrect) {
-            self::line("'$answer' is wrong answer ;(. Correct answer was '$correctAnswer'.");
-            self::line("Let's try again, {$this->name}!");
-
-            return false;
-        }
-
-        self::line("Correct!");
-        $this->correctAnswers++;
-
-        if ($this->isPlayerWin()) {
-            self::line("Congratulations, {$this->name}!");
-            return false;
-        }
-
-        return true;
-    }
-
-    protected function isPlayerWin()
-    {
-        return $this->correctAnswers === self::CORRECT_ANSWERS_TO_WIN;
-    }
+function isPlayerWin($correctAnswers)
+{
+    return $correctAnswers === CORRECT_ANSWERS_TO_WIN;
 }
