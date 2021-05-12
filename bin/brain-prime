@@ -8,7 +8,7 @@ if (file_exists($autoloadPath)) {
     require_once $autoloadPath;
 }
 
-use function Brain\Games\Games\Prime\run;
+use function BrainGames\Games\Prime\start;
 
-run();
+start();
 

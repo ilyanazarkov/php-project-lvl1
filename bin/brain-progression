@@ -8,6 +8,6 @@ if (file_exists($autoloadPath)) {
     require_once $autoloadPath;
 }
 
-use function Brain\Games\Games\Progression\run;
+use function BrainGames\Games\Progression\start;
 
-run();
+start();

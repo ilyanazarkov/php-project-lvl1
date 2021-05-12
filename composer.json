@@ -23,7 +23,6 @@
         "files": [
             "src/Cli.php",
             "src/Engine.php",
-            "src/Helper.php",
             "src/Games/Even.php",
             "src/Games/Calc.php",
             "src/Games/Gcd.php",

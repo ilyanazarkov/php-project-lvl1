@@ -1,25 +1,38 @@
 <?php
 
-namespace Brain\Games\Games\Even;
+namespace BrainGames\Games\Even;
 
-use function Brain\Games\Engine\greetings;
-use function Brain\Games\Engine\sayGameRuleset;
-use function Brain\Games\Engine\askQuestion;
-use function Brain\Games\Helper\isEven;
+use function BrainGames\Engine\run;
 
-function run(): void
+const RULES = 'Answer "yes" if the number is even, otherwise answer "no".';
+
+function start(): void
 {
-    $name = greetings();
-    sayGameRuleset('Answer "yes" if the number is even, otherwise answer "no".');
+    run(fn () => getGameData(), RULES);
+}
 
-    $correctAnswers = 0;
+/**
+ * @return array<int, int|string>
+ */
+function getGameData(): array
+{
+    $number = getNumber();
+    $answer = getCorrectAnswer(isEven($number));
 
-    do {
-        $num = rand(0, 100);
+    return [$number, $answer];
+}
 
-        $question = "Question: $num";
-        $correctAnswer = isEven($num) ? "yes" : "no";
+function getNumber(): int
+{
+    return rand(1, 100);
+}
 
-        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
-    } while ($result);
+function isEven(int $num): bool
+{
+    return $num % 2 === 0;
+}
+
+function getCorrectAnswer(bool $isEven): string
+{
+    return $isEven ? 'yes' : 'no';
 }

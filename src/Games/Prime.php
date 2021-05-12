@@ -1,25 +1,58 @@
 <?php
 
-namespace Brain\Games\Games\Prime;
+namespace BrainGames\Games\Prime;
 
-use function Brain\Games\Engine\greetings;
-use function Brain\Games\Engine\sayGameRuleset;
-use function Brain\Games\Engine\askQuestion;
-use function Brain\Games\Helper\isPrime;
+use function BrainGames\Engine\run;
 
-function run(): void
+const RULES = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+
+function start(): void
 {
-    $name = greetings();
-    sayGameRuleset('Answer "yes" if given number is prime. Otherwise answer "no".');
+    run(fn () => getGameData(), RULES);
+}
 
-    $correctAnswers = 0;
+/**
+ * @return array<int, string>
+ */
+function getGameData(): array
+{
+    $number = getNumber();
 
-    do {
-        $num = rand(0, 1000);
+    $question = "Question: $number";
+    $answer = getCorrectAnswer(isPrime($number));
 
-        $question = "Question: $num";
-        $correctAnswer = isPrime($num) ? "yes" : "no";
+    return [$question, $answer];
+}
 
-        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
-    } while ($result);
+function getNumber(): int
+{
+    return rand(0, 1000);
+}
+
+function isPrime(int $num): bool
+{
+    if ($num == 2 || $num == 3) {
+        return true;
+    }
+
+    if ($num % 2 === 0 || $num % 3 === 0) {
+        return false;
+    }
+
+    $divisor = 5;
+
+    while ($divisor ** 2 <= $num) {
+        if ($num % $divisor === 0 || $num % ($divisor + 2) === 0) {
+            return false;
+        }
+
+        $divisor += 6;
+    }
+
+    return true;
+}
+
+function getCorrectAnswer(bool $isPrime): string
+{
+    return $isPrime ? 'yes' : 'no';
 }

@@ -1,29 +1,58 @@
 <?php
 
-namespace Brain\Games\Games\Calc;
+namespace BrainGames\Games\Calc;
 
-use function Brain\Games\Engine\greetings;
-use function Brain\Games\Engine\sayGameRuleset;
-use function Brain\Games\Engine\askQuestion;
-use function Brain\Games\Helper\calc;
+use function BrainGames\Engine\run;
 
-function run(): void
+const RULES = 'What is the result of the expression?';
+
+function start(): void
 {
-    $name = greetings();
-    sayGameRuleset('What is the result of the expression?');
+    run(fn () => getGameData(), RULES);
+}
 
-    $correctAnswers = 0;
+/**
+ * @return array<int, string>
+ */
+function getGameData(): array
+{
+    $number1 = getNumber();
+    $number2 = getNumber();
+    $operation = getOperation();
 
-    do {
-        $num1 = rand(0, 100);
-        $num2 = rand(0, 100);
-        $operations = ["+", "-", "*"];
+    $question = "Question: $number1 $operation $number2";
+    $answer = (string) calc($operation, $number1, $number2);
 
-        $operation = $operations[array_rand($operations)];
+    return [$question, $answer];
+}
 
-        $question = "Question: $num1 $operation $num2";
-        $correctAnswer = (string) calc($operation, $num1, $num2);
+function getNumber(): int
+{
+    return rand(1, 100);
+}
 
-        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
-    } while ($result);
+function getOperation(): string
+{
+    $operations = ["+", "-", "*"];
+    return $operations[array_rand($operations)];
+}
+
+function calc(string $operation, int $num1, int $num2): int
+{
+    switch ($operation) {
+        case '+':
+            $result = $num1 + $num2;
+            break;
+        case '-':
+            $result = $num1 - $num2;
+            break;
+        case '*':
+            $result = $num1 * $num2;
+            break;
+        default:
+            $result = 0;
+            break;
+    }
+
+    return $result;
 }

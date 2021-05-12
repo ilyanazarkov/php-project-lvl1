@@ -1,42 +1,69 @@
 <?php
 
-namespace Brain\Games\Games\Progression;
+namespace BrainGames\Games\Progression;
 
-use function Brain\Games\Engine\greetings;
-use function Brain\Games\Engine\sayGameRuleset;
-use function Brain\Games\Engine\askQuestion;
+use function BrainGames\Engine\run;
 
-function run(): void
+const RULES = 'What number is missing in the progression?';
+
+function start(): void
 {
-    $name = greetings();
-    sayGameRuleset('What number is missing in the progression?');
-
-    $correctAnswers = 0;
-
-    do {
-        $range = getProgressionRange();
-
-        $hideNumKey = array_rand($range);
-        $correctAnswer = (string) $range[$hideNumKey];
-        $range[$hideNumKey] = "..";
-
-        $progression = implode(" ", $range);
-
-        $question = "Question: $progression";
-        $result = askQuestion($question, $correctAnswer, $correctAnswers, $name);
-    } while ($result);
+    run(fn () => getGameData(), RULES);
 }
 
-/** @return array<int> */
+/**
+ * @return array<int, int|string>
+ */
+function getGameData(): array
+{
+    $range = getProgressionRange();
+    [$hiddenNumber, $progression] = hideProgressionNumber($range);
+
+    $question = "Question: $progression";
+    $answer = $hiddenNumber;
+
+    return [$question, $answer];
+}
+
+/** @return array<int, int> */
 function getProgressionRange(): array
 {
-    $numbers = rand(5, 15);
+    $numbers = getNumbersCount();
 
-    $start = rand(0, 30);
-    $step = rand(1, 10);
+    $start = getStartNumber();
+    $step = getStep();
     $end = $start + $step * $numbers;
 
     $range = range($start, $end, $step);
 
     return $range;
+}
+
+function getNumbersCount(): int
+{
+    return rand(5, 15);
+}
+
+function getStartNumber(): int
+{
+    return rand(0, 30);
+}
+
+function getStep(): int
+{
+    return rand(1, 10);
+}
+
+/**
+ * @param array<int, int> $range
+ * @return array<int, int|string>
+ */
+function hideProgressionNumber(array $range): array
+{
+    $hideNumberKey = array_rand($range);
+    $hiddenNumber = (string)$range[$hideNumberKey];
+    $range[$hideNumberKey] = "..";
+    $progression = implode(" ", $range);
+
+    return [$hiddenNumber, $progression];
 }
