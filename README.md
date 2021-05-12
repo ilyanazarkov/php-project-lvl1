@@ -7,11 +7,11 @@ CLI games
 - make install
     
 ## How to run
-- make brain-even:
-- make brain-calc:
-- make brain-gcd:
-- make brain-prime:
-- make brain-progression:
+- make brain-even
+- make brain-calc
+- make brain-gcd
+- make brain-prime
+- make brain-progression
 
 Demo brain-even:
 [![asciicast](https://asciinema.org/a/puDmmcMJ1fHPSrOdZUUtoCvfk.svg)](https://asciinema.org/a/puDmmcMJ1fHPSrOdZUUtoCvfk)

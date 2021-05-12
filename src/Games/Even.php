@@ -18,8 +18,9 @@ function getGameData(): array
 {
     $number = getNumber();
     $answer = getCorrectAnswer(isEven($number));
+    $question = "Question: $number";
 
-    return [$number, $answer];
+    return [$question, $answer];
 }
 
 function getNumber(): int
